@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ShowApplication.Models;
+using System.Diagnostics;
 
 namespace ShowApplication.Controllers
 {
@@ -57,13 +58,18 @@ namespace ShowApplication.Controllers
         [HttpPost]
         public IHttpActionResult UpdateArtist(int id, Artist artist)
         {
+            Debug.WriteLine("ha have reached the update artist method");
             if (!ModelState.IsValid)
             {
+                Debug.WriteLine("model state is invalid");
                 return BadRequest(ModelState);
             }
 
             if (id != artist.ArtistlID)
             {
+                Debug.WriteLine("id mismatch");
+                Debug.WriteLine("GET parameter" + id);
+                Debug.WriteLine("POST parameter" + artist.ArtistlID);
                 return BadRequest();
             }
 
@@ -77,6 +83,7 @@ namespace ShowApplication.Controllers
             {
                 if (!ArtistExists(id))
                 {
+                    Debug.WriteLine("Artist not found");
                     return NotFound();
                 }
                 else
@@ -84,7 +91,7 @@ namespace ShowApplication.Controllers
                     throw;
                 }
             }
-
+            Debug.WriteLine("none of the conditions triggerd");
             return StatusCode(HttpStatusCode.NoContent);
         }
 
