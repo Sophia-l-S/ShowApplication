@@ -1,0 +1,23 @@
+﻿
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create Show</h2>
+<form action="/Artist/Create" method="POST">
+    <div>
+        <label>Artist:</label><input type="number" name="artistID" />
+    </div>
+    <div>
+        <label>Venue:</label><input type="number" name="venueID" />
+    </div>
+    <div>
+        <label>Date and Time:</label><input type="datetime" name="DateAndTime" />
+    </div>
+    <div>
+        <input type="submit" value="Add Show" />
+    </div>
+
+</form>
+

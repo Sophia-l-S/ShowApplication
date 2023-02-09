@@ -13,69 +13,71 @@ using System.Diagnostics;
 
 namespace ShowApplication.Controllers
 {
-    public class ArtistDataController : ApiController
+    public class ShowDataController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/ArtistsData/ListArtists
+        // GET: api/ShowsData/ListShows
         [HttpGet]
-            public IEnumerable<ArtistDto> ListArtists()
+        public IEnumerable<ShowDto> ListShows()
         {
-            List<Artist> Artists = db.Artists.ToList();
-            List<ArtistDto> ArtistDtos = new List<ArtistDto>();
+            List<Show> Shows = db.Shows.ToList();
+            List<ShowDto> ShowDtos = new List<ShowDto>();
 
-            Artists.ForEach(a => ArtistDtos.Add(new ArtistDto()
+            Shows.ForEach(a => ShowDtos.Add(new ShowDto()
             {
-                ArtistlID = a.ArtistlID,
-                Fname = a.Fname,
-                Lname = a.Lname
+                ShowID = a.showID,
+                artistID = a.artistID,
+                venueID = a.venueID,
+                DateAndTime = a.DateAndTime
             }));
 
-            return ArtistDtos;
+            return ShowDtos;
         }
 
-        // GET: api/ArtistsData/FindArtist/5
-        [ResponseType(typeof(Artist))]
+        // GET: api/ShowsData/FindShow/5
+        [ResponseType(typeof(Show))]
         [HttpGet]
-        public IHttpActionResult FindArtist(int id)
+        public IHttpActionResult FindShow(int id)
         {
-            Artist Artist = db.Artists.Find(id);
-            ArtistDto ArtistDto = new ArtistDto()
+            Show Show = db.Shows.Find(id);
+            ShowDto ShowDto = new ShowDto()
             {
-                ArtistlID = Artist.ArtistlID,
-                Fname = Artist.Fname,
-                Lname = Artist.Lname
+                ShowID = Show.showID,
+                artistID = Show.artistID,
+                venueID = Show.venueID,
+                DateAndTime = Show.DateAndTime
             };
 
-            if (Artist == null)
+            if (Show == null)
             {
                 return NotFound();
             }
 
-            return Ok(ArtistDto);
+            return Ok(ShowDto);
         }
 
-        // POST: api/ArtistsData/updateArtist/5
+        // POST: api/ShowsData/updateShow/5
         [ResponseType(typeof(void))]
         [HttpPost]
-        public IHttpActionResult UpdateArtist(int id, Artist artist)
+        public IHttpActionResult UpdateShow(int id, Show show)
         {
-            Debug.WriteLine("ha have reached the update artist method");
+            Debug.WriteLine("ha have reached the update show method");
             if (!ModelState.IsValid)
             {
                 Debug.WriteLine("model state is invalid");
                 return BadRequest(ModelState);
             }
 
-            if (id != artist.ArtistlID)
+            if (id != show.showID)
             {
                 Debug.WriteLine("id mismatch");
                 Debug.WriteLine("GET parameter" + id);
-                Debug.WriteLine("POST parameter" + artist.ArtistlID);
+                Debug.WriteLine("POST parameter" + show.showID);
                 return BadRequest();
             }
 
-            db.Entry(artist).State = EntityState.Modified;
+            db.Entry(show).State = EntityState.Modified;
 
             try
             {
@@ -83,9 +85,9 @@ namespace ShowApplication.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ArtistExists(id))
+                if (!ShowExists(id))
                 {
-                    Debug.WriteLine("Artist not found");
+                    Debug.WriteLine("Show not found");
                     return NotFound();
                 }
                 else
@@ -97,34 +99,34 @@ namespace ShowApplication.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/ArtistsData/AddArtist
-        [ResponseType(typeof(Artist))]
+        // POST: api/ShowsData/AddShow
+        [ResponseType(typeof(Show))]
         [HttpPost]
-        public IHttpActionResult AddArtist(Artist artist)
+        public IHttpActionResult AddShow(Show show)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Artists.Add(artist);
+            db.Shows.Add(show);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = artist.ArtistlID }, artist);
+            return CreatedAtRoute("DefaultApi", new { id = show.showID }, show);
         }
 
-        // DELETE: api/ArtistsData/DeleteArtist/5
-        [ResponseType(typeof(Artist))]
+        // DELETE: api/ShowsData/DeleteShow/5
+        [ResponseType(typeof(Show))]
         [HttpPost]
-        public IHttpActionResult DeleteArtist(int id)
+        public IHttpActionResult DeleteShow(int id)
         {
-            Artist artist = db.Artists.Find(id);
-            if (artist == null)
+            Show show = db.Shows.Find(id);
+            if (show == null)
             {
                 return NotFound();
             }
 
-            db.Artists.Remove(artist);
+            db.Shows.Remove(show);
             db.SaveChanges();
 
             return Ok();
@@ -139,9 +141,9 @@ namespace ShowApplication.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ArtistExists(int id)
+        private bool ShowExists(int id)
         {
-            return db.Artists.Count(e => e.ArtistlID == id) > 0;
+            return db.Shows.Count(e => e.showID == id) > 0;
         }
     }
 }

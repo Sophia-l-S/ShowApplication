@@ -1,0 +1,17 @@
+﻿@model ShowApplacation.Models.ArtistDto
+
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>Show Artist</h2>
+@foreach (var artist in Model)
+{
+    <a href="/Artist/List">Go back to list</a>
+    <h2>Artist ID number: @Model.ArtistlID</h2>
+    <div>Artist First Name: @Model.Fname</div>
+    <div>Artist Last Name: @Model.Lname</div>
+
+}
+
