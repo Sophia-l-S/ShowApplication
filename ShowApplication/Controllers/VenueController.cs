@@ -4,51 +4,49 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Net.Http;
-using System.Diagnostics;
-using ShowApplication.Models;
-//using ShowApplication.Models.ViewModels;
+using VenueApplication.Models;
 using System.Web.Script.Serialization;
 
-namespace ShowApplication.Controllers
+namespace VenueApplication.Controllers
 {
-    public class ShowController : Controller
+    public class VenueController : Controller
     {
         private static readonly HttpClient client;
         private JavaScriptSerializer jss = new JavaScriptSerializer();
-        static ShowController()
+        static VenueController()
         {
             client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44321/api/showdata/");
+            client.BaseAddress = new Uri("https://localhost:44321/api/venuedata/");
         }
 
 
-        // GET: Show/List
+        // GET: Venue/List
         public ActionResult List()
         {
-            //objective; communicate with our show data api to retreve a list os shows
+            //objective; communicate with our venue data api to retreve a list os venues
             //change the numbers
-            //crul https://localhost:44321/api/showdata/listshow
+            //crul https://localhost:44321/api/venuedata/listvenue
 
-            string url = "showdata/listshow";
+            string url = "listvenue";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            IEnumerable<ShowDto> shows = response.Content.ReadAsAsync<IEnumerable<ShowDto>>().Result;
+            IEnumerable<VenueDto> venues = response.Content.ReadAsAsync<IEnumerable<VenueDto>>().Result;
 
 
-            return View(shows);
+            return View(venues);
         }
 
-        // GET: Show/Details/5
+        // GET: Venue/Details/5
         public ActionResult Details(int id)
         {
-            //objective; communicate with our show data api to retreve a list os shows
+            //objective; communicate with our venue data api to retreve a list os venues
             //change the numbers
-            //crul https://localhost:44321/api/showdata/findshow/{id}
+            //crul https://localhost:44321/api/venuedata/findvenue/{id}
 
-            string url = "showdata/findshow/"+id;
+            string url = "findvenue/"+id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            ShowDto selectedshow = response.Content.ReadAsAsync<ShowDto>().Result;
+            VenueDto selectedvenue = response.Content.ReadAsAsync<VenueDto>().Result;
 
             return View();
         }
@@ -58,29 +56,22 @@ namespace ShowApplication.Controllers
             return View();
         }
 
-        // GET: Show/New
+        // GET: Venue/New
         public ActionResult New()
         {
-            //info about all shows
-            //GET api/showdata/listshows
-            string url = "showsdata/listshow";
-            HttpResponseMessage response = client.GetAsync(url).Result;
-            IEnumerable<ShowDto> SpeciesOptions = response.Content.ReadAsAsync<IEnumerable<ShowDto>>().Result;
-
-
             return View();
         }
 
-        // POST: Show/Create
+        // POST: Venue/Create
         [HttpPost]
-        public ActionResult Create(Show show)
+        public ActionResult Create(Venue venue)
         {
-            //objective: add new show into the system using api
-            //crul -H "Content-Type:applacation/json" -d @show.json https://localhost:44321/api/showdata/addshow
-            string url = "showdata/addshow";
+            //objective: add new venue into the system using api
+            //crul -H "Content-Type:applacation/json" -d @venue.json https://localhost:44321/api/venuedata/addvenue
+            string url = "addvenue";
 
             
-            string jsonpayload = jss.Serialize(show);
+            string jsonpayload = jss.Serialize(venue);
 
             HttpContent content = new StringContent(jsonpayload);
             content.Headers.ContentType.MediaType = "application/json";
@@ -98,16 +89,13 @@ namespace ShowApplication.Controllers
             return RedirectToAction("List");
         }
 
-        // GET: Show/Edit/5
+        // GET: Venue/Edit/5
         public ActionResult Edit(int id)
         {
-            string url = "showdata/findshow" + id;
-            HttpResponseMessage response = client.GetAsync(url).Result;
-            ShowDto selectedshow = response.Content.ReadAsAsync<ShowDto>().Result;
-            return View(selectedshow);
+            return View();
         }
 
-        // POST: Show/Edit/5
+        // POST: Venue/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -123,13 +111,13 @@ namespace ShowApplication.Controllers
             }
         }
 
-        // GET: Show/Delete/5
+        // GET: Venue/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Show/Delete/5
+        // POST: Venue/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

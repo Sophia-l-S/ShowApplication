@@ -24,8 +24,16 @@ namespace ShowApplication.Models
         public virtual Venue venue { get; set; }
 
         public DateTime DateAndTime { get; set; }
-
-
-       
+  
     }
+
+    public class ShowDto
+    {
+        public int showID { get; set; }
+        public string artistID { get; set; }
+        public string venueID { get; set; }
+        public string DateAndTime { get; set; }
+
+    }
+
 }

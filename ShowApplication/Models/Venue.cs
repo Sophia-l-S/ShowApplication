@@ -11,11 +11,20 @@ namespace ShowApplication.Models
     public class Venue
     {
         [Key]
-        public int SpeciesID { get; set; }
+        public int venueID { get; set; }
 
         public string venueName { get; set; }
         public string City { get; set; }
         public string ProvenceState { get; set; }
        
+    }
+
+    public class VenueDto
+    {
+        public int venueID { get; set; }
+        public string venueName { get; set; }
+        public string City { get; set; }
+        public string ProvenceState { get; set; }
+
     }
 }

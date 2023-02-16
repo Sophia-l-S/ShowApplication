@@ -19,6 +19,7 @@ namespace ShowApplication.Controllers
 
         // GET: api/ShowsData/ListShows
         [HttpGet]
+
         public IEnumerable<ShowDto> ListShows()
         {
             List<Show> Shows = db.Shows.ToList();
