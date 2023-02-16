@@ -19,7 +19,8 @@ namespace ShowApplication.Controllers
 
         // GET: api/ArtistsData/ListArtists
         [HttpGet]
-            public IEnumerable<ArtistDto> ListArtists()
+        [ResponseType(typeof(ArtistDto))]
+        public IHttpActionResult ListArtists()
         {
             List<Artist> Artists = db.Artists.ToList();
             List<ArtistDto> ArtistDtos = new List<ArtistDto>();
@@ -31,11 +32,11 @@ namespace ShowApplication.Controllers
                 Lname = a.Lname
             }));
 
-            return ArtistDtos;
+            return Ok(ArtistDtos);
         }
 
         // GET: api/ArtistsData/FindArtist/5
-        [ResponseType(typeof(Artist))]
+        [ResponseType(typeof(ArtistDto))]
         [HttpGet]
         public IHttpActionResult FindArtist(int id)
         {
@@ -100,17 +101,17 @@ namespace ShowApplication.Controllers
         // POST: api/ArtistsData/AddArtist
         [ResponseType(typeof(Artist))]
         [HttpPost]
-        public IHttpActionResult AddArtist(Artist artist)
+        public IHttpActionResult AddArtist(Artist Artist)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Artists.Add(artist);
+            db.Artists.Add(Artist);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = artist.ArtistlID }, artist);
+            return CreatedAtRoute("DefaultApi", new { id = Artist.ArtistlID }, Artist);
         }
 
         // DELETE: api/ArtistsData/DeleteArtist/5
@@ -118,13 +119,13 @@ namespace ShowApplication.Controllers
         [HttpPost]
         public IHttpActionResult DeleteArtist(int id)
         {
-            Artist artist = db.Artists.Find(id);
-            if (artist == null)
+            Artist Artist = db.Artists.Find(id);
+            if (Artist == null)
             {
                 return NotFound();
             }
 
-            db.Artists.Remove(artist);
+            db.Artists.Remove(Artist);
             db.SaveChanges();
 
             return Ok();

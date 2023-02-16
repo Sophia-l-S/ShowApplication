@@ -30,9 +30,9 @@ namespace ShowApplication.Models
     public class ShowDto
     {
         public int showID { get; set; }
-        public string artistID { get; set; }
-        public string venueID { get; set; }
-        public string DateAndTime { get; set; }
+        public int artistID { get; set; }
+        public int venueID { get; set; }
+        public DateTime DateAndTime { get; set; }
 
     }
 

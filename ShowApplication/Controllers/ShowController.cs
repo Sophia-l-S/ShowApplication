@@ -48,7 +48,9 @@ namespace ShowApplication.Controllers
             string url = "showdata/findshow/"+id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            ShowDto selectedshow = response.Content.ReadAsAsync<ShowDto>().Result;
+            ShowDto SelectedShow = response.Content.ReadAsAsync<ShowDto>().Result;
+
+            //ViewModel.SelectedShow = SelectedShow;
 
             return View();
         }
@@ -65,10 +67,9 @@ namespace ShowApplication.Controllers
             //GET api/showdata/listshows
             string url = "showsdata/listshow";
             HttpResponseMessage response = client.GetAsync(url).Result;
-            IEnumerable<ShowDto> SpeciesOptions = response.Content.ReadAsAsync<IEnumerable<ShowDto>>().Result;
+            IEnumerable<ShowDto> ShowOptions = response.Content.ReadAsAsync<IEnumerable<ShowDto>>().Result;
 
-
-            return View();
+            return View(ShowOptions);
         }
 
         // POST: Show/Create
@@ -85,64 +86,60 @@ namespace ShowApplication.Controllers
             HttpContent content = new StringContent(jsonpayload);
             content.Headers.ContentType.MediaType = "application/json";
 
-            HttpResponseMessage response = client.PostAsync(url, content).Result;
-            if (response.IsSuccessStatusCode)
-            {
-                return RedirectToAction("List");
-            }
-            else
-            {
-                return RedirectToAction("Error");
-            }
+           // HttpResponseMessage response = client.PostAsync(url, content).Result;
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    return RedirectToAction("List");
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Error");
+            //}
 
-            return RedirectToAction("List");
         }
 
         // GET: Show/Edit/5
         public ActionResult Edit(int id)
         {
+           // UpdateShow ViewModel = new UpdateShow();
+
             string url = "showdata/findshow" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-            ShowDto selectedshow = response.Content.ReadAsAsync<ShowDto>().Result;
-            return View(selectedshow);
+            ShowDto selectedShow = response.Content.ReadAsAsync<ShowDto>().Result;
+            return View(selectedShow);
         }
 
-        // POST: Show/Edit/5
+        // POST: Show/update/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Update(int id, Show show)
         {
-            try
-            {
-                // TODO: Add update logic here
+            string url = "showdata/updateshow/" + id;
+            string jsonpayload = jss.Serialize(show);
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+
+
         }
 
         // GET: Show/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteConfirm(int id)
         {
-            return View();
+            string url = "showdata/findshow/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            ShowDto selectedshow = response.Content.ReadAsAsync<ShowDto>().Result;
+            return View(selectedshow);
+
         }
 
         // POST: Show/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            string url = "showdata/deleteshow/" + id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

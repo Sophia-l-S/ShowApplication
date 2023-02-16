@@ -181,6 +181,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\VenueDataController.cs" />
+    <Compile Include="Controllers\DetailsArtists.cs" />
     <Compile Include="Controllers\VenueController.cs" />
     <Compile Include="Controllers\ArtistsDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -188,7 +190,6 @@
     <Compile Include="Controllers\ArtistController.cs" />
     <Compile Include="Controllers\ShowController.cs" />
     <Compile Include="Controllers\ShowDataController.cs" />
-    <Compile Include="Controllers\VenueDataController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -231,6 +232,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </Content>
     <None Include="jsondata\artist.json" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

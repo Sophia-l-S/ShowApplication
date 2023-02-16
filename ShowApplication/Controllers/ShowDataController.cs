@@ -25,12 +25,12 @@ namespace ShowApplication.Controllers
             List<Show> Shows = db.Shows.ToList();
             List<ShowDto> ShowDtos = new List<ShowDto>();
 
-            Shows.ForEach(a => ShowDtos.Add(new ShowDto()
+            Shows.ForEach(s => ShowDtos.Add(new ShowDto()
             {
-                ShowID = a.showID,
-                artistID = a.artistID,
-                venueID = a.venueID,
-                DateAndTime = a.DateAndTime
+                showID = s.showID,
+                artistID = s.artistID,
+                venueID = s.venueID,
+                DateAndTime = s.DateAndTime
             }));
 
             return ShowDtos;
@@ -44,7 +44,7 @@ namespace ShowApplication.Controllers
             Show Show = db.Shows.Find(id);
             ShowDto ShowDto = new ShowDto()
             {
-                ShowID = Show.showID,
+                showID = Show.showID,
                 artistID = Show.artistID,
                 venueID = Show.venueID,
                 DateAndTime = Show.DateAndTime

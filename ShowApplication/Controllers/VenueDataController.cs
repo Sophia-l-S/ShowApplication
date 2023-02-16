@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ShowApplication.Models;
+using System.Diagnostics;
 
 namespace ShowApplication.Controllers
 {
@@ -16,40 +17,68 @@ namespace ShowApplication.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/VenueData
-        public IQueryable<Venue> GetVenues()
+        // GET: api/VenuesData/ListVenues
+        [HttpGet]
+        [ResponseType(typeof(VenueDto))]
+        public IHttpActionResult ListVenues()
         {
-            return db.Venues;
+            List<Venue> Venues = db.Venues.ToList();
+            List<VenueDto> VenueDtos = new List<VenueDto>();
+
+            Venues.ForEach(a => VenueDtos.Add(new VenueDto()
+            {
+                venueID = a.venueID,
+                venueName = a.venueName,
+                City = a.City,
+                ProvenceState = a.ProvenceState
+            }));
+
+            return Ok(VenueDtos);
         }
 
-        // GET: api/VenueData/5
-        [ResponseType(typeof(Venue))]
-        public IHttpActionResult GetVenue(int id)
+        // GET: api/VenuesData/FindVenue/5
+        [ResponseType(typeof(VenueDto))]
+        [HttpGet]
+        public IHttpActionResult FindVenue(int id)
         {
-            Venue venue = db.Venues.Find(id);
-            if (venue == null)
+            Venue Venue = db.Venues.Find(id);
+            VenueDto VenueDto = new VenueDto()
+            {
+                venueID = Venue.venueID,
+                venueName = Venue.venueName,
+                City = Venue.City,
+                ProvenceState = Venue.ProvenceState
+            };
+
+            if (Venue == null)
             {
                 return NotFound();
             }
 
-            return Ok(venue);
+            return Ok(VenueDto);
         }
 
-        // PUT: api/VenueData/5
+        // POST: api/VenuesData/updateVenue/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutVenue(int id, Venue venue)
+        [HttpPost]
+        public IHttpActionResult UpdateVenue(int id, Venue Venue)
         {
+            Debug.WriteLine("ha have reached the update venue method");
             if (!ModelState.IsValid)
             {
+                Debug.WriteLine("model state is invalid");
                 return BadRequest(ModelState);
             }
 
-            if (id != venue.SpeciesID)
+            if (id != Venue.venueID)
             {
+                Debug.WriteLine("id mismatch");
+                Debug.WriteLine("GET parameter" + id);
+                Debug.WriteLine("POST parameter" + Venue.venueID);
                 return BadRequest();
             }
 
-            db.Entry(venue).State = EntityState.Modified;
+            db.Entry(Venue).State = EntityState.Modified;
 
             try
             {
@@ -59,6 +88,7 @@ namespace ShowApplication.Controllers
             {
                 if (!VenueExists(id))
                 {
+                    Debug.WriteLine("Venue not found");
                     return NotFound();
                 }
                 else
@@ -66,39 +96,41 @@ namespace ShowApplication.Controllers
                     throw;
                 }
             }
-
+            Debug.WriteLine("none of the conditions triggerd");
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/VenueData
+        // POST: api/VenuesData/AddVenue
         [ResponseType(typeof(Venue))]
-        public IHttpActionResult PostVenue(Venue venue)
+        [HttpPost]
+        public IHttpActionResult AddVenue(Venue Venue)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Venues.Add(venue);
+            db.Venues.Add(Venue);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = venue.SpeciesID }, venue);
+            return CreatedAtRoute("DefaultApi", new { id = Venue.venueID }, Venue);
         }
 
-        // DELETE: api/VenueData/5
+        // DELETE: api/VenuesData/DeleteVenue/5
         [ResponseType(typeof(Venue))]
+        [HttpPost]
         public IHttpActionResult DeleteVenue(int id)
         {
-            Venue venue = db.Venues.Find(id);
-            if (venue == null)
+            Venue Venue = db.Venues.Find(id);
+            if (Venue == null)
             {
                 return NotFound();
             }
 
-            db.Venues.Remove(venue);
+            db.Venues.Remove(Venue);
             db.SaveChanges();
 
-            return Ok(venue);
+            return Ok();
         }
 
         protected override void Dispose(bool disposing)
@@ -112,7 +144,7 @@ namespace ShowApplication.Controllers
 
         private bool VenueExists(int id)
         {
-            return db.Venues.Count(e => e.SpeciesID == id) > 0;
+            return db.Venues.Count(e => e.venueID == id) > 0;
         }
     }
 }

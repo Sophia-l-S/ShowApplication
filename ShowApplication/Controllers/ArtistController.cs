@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Net.Http;
 using System.Diagnostics;
 using ShowApplication.Models;
-using ShowApplication.Models.ViewModels;
+//using ShowApplication.Models.ViewModels;
 using System.Web.Script.Serialization;
 
 namespace ShowApplication.Controllers
