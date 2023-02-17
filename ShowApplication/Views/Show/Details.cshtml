@@ -1,17 +1,21 @@
-﻿@model ShowApplacation.Models.ArtistDto
-
-
+﻿@model ShowApplication.Models.ViewModels.DetailsShow
 @{
     ViewBag.Title = "View";
 }
 
-<h2>Show Artist</h2>
-@foreach (var artist in Model)
-{
-    <a href="/Artist/List">Go back to list</a>
-    <h2>Artist ID number: @Model.ArtistlID</h2>
-    <div>Artist First Name: @Model.Fname</div>
-    <div>Artist Last Name: @Model.Lname</div>
 
-}
+
+<a href="/Show/List">Go back to list</a>
+<br />
+<a href="/Show/Edit/@Model.SelectedShow.showID">Update</a>
+<br />
+<h2>@Model.showID</h2>
+<div>ShowID: @Model.showID </div>
+<div>ArtistID: @Model.artistID</div>
+<div>VenueID: @Model.venueID</div>
+<div>Show Date and Time: @Model.DateAndTime</div>
+
+
+
+
 

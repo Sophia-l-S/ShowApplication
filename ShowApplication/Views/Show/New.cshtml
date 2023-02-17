@@ -1,11 +1,11 @@
-﻿
+﻿@model IEnumerable<ShowApplication.Models.ArtistDto>
 
 @{
     ViewBag.Title = "Create";
 }
 
 <h2>Create Show</h2>
-<form action="/Artist/Create" method="POST">
+<form action="/Show/Create" method="POST">
     <div>
         <label>Artist:</label><input type="number" name="artistID" />
     </div>

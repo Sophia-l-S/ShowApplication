@@ -1,14 +1,16 @@
-﻿@model IEnumerable<ShowApplication.Models.ArtistDto>
+﻿@model IEnumerable<ShowApplication.Models.ShowDto>
 @{
     ViewBag.Title = "List";
 }
 
 <h2>List</h2>
-@foreach (var artist in Model)
+<a href="/Show/New">New Show</a>
+@foreach (var show in Model)
 {
-    <h2><a href="/Artist/Details/@artist.ArtistlID">@Model.ArtistlID</a></h2>
-    <div>Artist First Name: @artist.Fname</div>
-    <div>Artist Last Name: @artist.Lname</div>
+    <h2><a href="/Show/Details/@show.showID">@show.showID</a></h2>
+    <div>ArtistID: @show.artistID</div>
+    <div>VenueID: @show.venueID</div>
+    <div>Show Date and Time: @show.DateAndTime</div>
 
 }
 

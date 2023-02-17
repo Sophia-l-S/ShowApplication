@@ -1,0 +1,17 @@
+﻿@model ShowApplication.Models.ShowDto
+
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+<h2>Are you sure you want to delete this Show?</h2>
+<a href="/Show/List">Cancel</a>
+<h2>@Model.showID</h2>
+<div>ShowID: @Model.showID </div>
+<div>ArtistID: @Model.artistID</div>
+<div>VenueID: @Model.venueID</div>
+<div>Show Date and Time: @Model.DateAndTime</div>
+
+<form action="/Show/Delete/@Model.showID" method="POST">
+    <input type="submit" value="Confirm Delete" />
+
+</form>
