@@ -197,21 +197,9 @@
     <Compile Include="Migrations\202302030106380_InitialCreate.Designer.cs">
       <DependentUpon>202302030106380_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202302030125347_artists.cs" />
-    <Compile Include="Migrations\202302030125347_artists.Designer.cs">
-      <DependentUpon>202302030125347_artists.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202302030144045_venues.cs" />
-    <Compile Include="Migrations\202302030144045_venues.Designer.cs">
-      <DependentUpon>202302030144045_venues.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202302030211595_shows.cs" />
-    <Compile Include="Migrations\202302030211595_shows.Designer.cs">
-      <DependentUpon>202302030211595_shows.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202302030256122_show-venue-artist.cs" />
-    <Compile Include="Migrations\202302030256122_show-venue-artist.Designer.cs">
-      <DependentUpon>202302030256122_show-venue-artist.cs</DependentUpon>
+    <Compile Include="Migrations\202302231935068_full-migration.cs" />
+    <Compile Include="Migrations\202302231935068_full-migration.Designer.cs">
+      <DependentUpon>202302231935068_full-migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -322,17 +310,8 @@
     <EmbeddedResource Include="Migrations\202302030106380_InitialCreate.resx">
       <DependentUpon>202302030106380_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202302030125347_artists.resx">
-      <DependentUpon>202302030125347_artists.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202302030144045_venues.resx">
-      <DependentUpon>202302030144045_venues.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202302030211595_shows.resx">
-      <DependentUpon>202302030211595_shows.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202302030256122_show-venue-artist.resx">
-      <DependentUpon>202302030256122_show-venue-artist.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202302231935068_full-migration.resx">
+      <DependentUpon>202302231935068_full-migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -31,7 +31,7 @@ namespace ShowApplication.Controllers
             //change the numbers
             //crul https://localhost:44321/api/showdata/listshow
 
-            string url = "showdata/listshow";
+            string url = "listshows";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             IEnumerable<ShowDto> shows = response.Content.ReadAsAsync<IEnumerable<ShowDto>>().Result;

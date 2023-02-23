@@ -8,5 +8,6 @@
 @foreach (var venue in Model)
 {
     <h2><a href="/Venue/Details/@venue.venueID">@venue.venueName, @venue.City, @venue.ProvenceState</a></h2>
+    <h2>city: @venue.City</h2>
 }
 

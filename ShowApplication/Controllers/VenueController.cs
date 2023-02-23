@@ -33,7 +33,7 @@ namespace ShowApplication.Controllers
             //change the numbers
             //crul https://localhost:44321/api/venuedata/listvenue
 
-            string url = "venuedata/listvenue";
+            string url = "listvenues";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             IEnumerable<VenueDto> venues = response.Content.ReadAsAsync<IEnumerable<VenueDto>>().Result;
