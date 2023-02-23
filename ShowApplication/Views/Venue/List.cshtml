@@ -1,0 +1,12 @@
+﻿@model IEnumerable<ShowApplication.Models.VenueDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+<a href="/Vneue/New">New Venue</a>
+@foreach (var venue in Model)
+{
+    <h2><a href="/Venue/Details/@venue.venueID">@venue.venueName, @venue.City, @venue.ProvenceState</a></h2>
+}
+

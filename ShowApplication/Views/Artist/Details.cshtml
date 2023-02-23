@@ -1,0 +1,16 @@
+﻿@model ShowApplication.Models.ViewModels.DetailsArtist
+@{
+    ViewBag.Title = "View";
+}
+
+
+
+<a href="/Artist/List">Go back to list</a>
+<br />
+<a href="/Artist/Edit/@Model.SelectedArtist.ArtistlID">Update</a>
+<br />
+<a href="/Artist/DeleteConfirm/@Model.SelectedArtist.ArtistlID">Delete</a>
+
+
+
+

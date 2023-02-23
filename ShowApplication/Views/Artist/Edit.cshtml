@@ -1,0 +1,23 @@
+﻿@model ShowApplication.Models.ArtistDto
+@{
+    ViewBag.Title = "Edit";
+}
+<h2>Update Artist</h2>
+<form action="/Artist/Update/@Model.ArtistlID" method="POST">
+    <div style="display:none;">
+        <input type="text" name="ArtistlID" value="@Model.ArtistlID" />
+    </div>
+    <div>
+        <label>ArtistID:</label> <input type="number" name="artistID" value="@Model.ArtistlID" />
+    </div>
+    <div>
+        <label>Fname:</label> <input type="text" name="Fname" value="@Model.Fname" />
+    </div>
+    <div>
+        <label>Lname:</label> <input type="text" name="Lname" value="@Model.Lname" />
+    </div>
+    <div>
+        <input type="submit" value="Update Artist" />
+
+    </div>
+</form>

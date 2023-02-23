@@ -289,6 +289,18 @@
     <Content Include="Views\Show\Error.cshtml" />
     <Content Include="Views\Show\DeleteConfirm.cshtml" />
     <Content Include="Views\Show\Edit.cshtml" />
+    <Content Include="Views\Artist\DeleteConfirm.cshtml" />
+    <Content Include="Views\Artist\Details.cshtml" />
+    <Content Include="Views\Artist\Edit.cshtml" />
+    <Content Include="Views\Artist\Error.cshtml" />
+    <Content Include="Views\Artist\List.cshtml" />
+    <Content Include="Views\Artist\New.cshtml" />
+    <Content Include="Views\Venue\DeleteConfirm.cshtml" />
+    <Content Include="Views\Venue\Details.cshtml" />
+    <Content Include="Views\Venue\Edit.cshtml" />
+    <Content Include="Views\Venue\Error.cshtml" />
+    <Content Include="Views\Venue\List.cshtml" />
+    <Content Include="Views\Venue\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

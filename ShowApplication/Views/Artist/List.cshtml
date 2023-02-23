@@ -1,0 +1,13 @@
+﻿@model IEnumerable<ShowApplication.Models.ArtistDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+<a href="/Artist/New">New Artist</a>
+@foreach (var artist in Model)
+{
+    <h2><a href="/Artist/Details/@artist.ArtistlID">@artist.Fname, @artist.Lname</a></h2>
+
+}
+

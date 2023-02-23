@@ -1,0 +1,26 @@
+﻿@model ShowApplication.Models.VenueDto
+@{
+    ViewBag.Title = "Edit";
+}
+<h2>Update Venue</h2>
+<form action="/Venue/Update/@Model.venueID" method="POST">
+    <div style="display:none;">
+        <input type="text" name="venueID" value="@Model.venueID" />
+    </div>
+    <div>
+        <label>venueID:</label> <input type="number" name="venueID" value="@Model.venueID" />
+    </div>
+    <div>
+        <label>Venue Name:</label> <input type="text" name="venueName" value="@Model.venueName" />
+    </div>
+    <div>
+        <label>City:</label> <input type="text" name="City" value="@Model.City" />
+    </div>
+    <div>
+        <label>ProvenceState:</label> <input type="text" name="ProvenceState" value="@Model.ProvenceState" />
+    </div>
+    <div>
+        <input type="submit" value="Update Venue" />
+
+    </div>
+</form>

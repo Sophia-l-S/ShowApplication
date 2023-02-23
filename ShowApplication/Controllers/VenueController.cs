@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Net.Http;
 using System.Diagnostics;
 using ShowApplication.Models;
-using //ShowApplication.Models.ViewModels;
+//using ShowApplication.Models.ViewModels;
 using System.Web.Script.Serialization;
 
 namespace ShowApplication.Controllers
@@ -81,26 +81,22 @@ namespace ShowApplication.Controllers
         public ActionResult Create(Venue Venue)
         {
             //objective: add new venue into the system using api
-            //crul -H "Content-Type:applacation/json" -d @venue.json https://localhost:44321/api/venuedata/addvenue
+           //crul -H "Content-Type:applacation/json" -d @venue.json https://localhost:44321/api/venuedata/addvenue
             string url = "venuedata/addvenue";
-
-            
             string jsonpayload = jss.Serialize(Venue);
 
             HttpContent content = new StringContent(jsonpayload);
             content.Headers.ContentType.MediaType = "application/json";
 
-            //HttpResponseMessage response = client.PostAsync(url, content).Result;
-            //if (response.IsSuccessStatusCode)
-           // {
-           //     return RedirectToAction("List");
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Error");
-            //}
-
-            //return RedirectToAction("List");
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
         }
 
         // GET: Venue/Edit/5
@@ -121,6 +117,17 @@ namespace ShowApplication.Controllers
            string jsonpayload = jss.Serialize(Venue);
            HttpContent content = new StringContent(jsonpayload);
            content.Headers.ContentType.MediaType = "application/json";
+           HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+
         }
 
         // GET: Venue/Delete/5
@@ -140,6 +147,16 @@ namespace ShowApplication.Controllers
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
 
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
         }
     }
 }

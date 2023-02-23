@@ -1,0 +1,18 @@
+﻿@model ShowApplication.Models.VenueDto
+
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+<h2>Are you sure you want to delete this Venue?</h2>
+<a href="/Venue/List">Cancel</a>
+<h2>@Model.venueID</h2>
+<div>VenueID: @Model.venueID </div>
+<div> Venue Name: @Model.venueName</div>
+<div>City: @Model.City</div>
+<div>Provence or State: @Model.ProvenceState</div>
+
+
+<form action="/Venue/Delete/@Model.venueID" method="POST">
+    <input type="submit" value="Confirm Delete" />
+
+</form>

@@ -15,6 +15,8 @@ namespace ShowApplication.Controllers
     {
         private static readonly HttpClient client;
         private JavaScriptSerializer jss = new JavaScriptSerializer();
+        private object response;
+
         static ShowController()
         {
             client = new HttpClient();
@@ -79,29 +81,25 @@ namespace ShowApplication.Controllers
             //objective: add new show into the system using api
             //crul -H "Content-Type:applacation/json" -d @show.json https://localhost:44321/api/showdata/addshow
             string url = "showdata/addshow";
-
             
             string jsonpayload = jss.Serialize(show);
-
             HttpContent content = new StringContent(jsonpayload);
             content.Headers.ContentType.MediaType = "application/json";
-
-           // HttpResponseMessage response = client.PostAsync(url, content).Result;
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    return RedirectToAction("List");
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Error");
-            //}
-
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
         }
 
         // GET: Show/Edit/5
         public ActionResult Edit(int id)
         {
-           // UpdateShow ViewModel = new UpdateShow();
+            //UpdateShow ViewModel = new UpdateShow();
 
             string url = "showdata/findshow" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
@@ -109,7 +107,7 @@ namespace ShowApplication.Controllers
             return View(selectedShow);
         }
 
-        // POST: Show/update/5
+        // POST: Show/Update/5
         [HttpPost]
         public ActionResult Update(int id, Show show)
         {
@@ -117,9 +115,15 @@ namespace ShowApplication.Controllers
             string jsonpayload = jss.Serialize(show);
             HttpContent content = new StringContent(jsonpayload);
             content.Headers.ContentType.MediaType = "application/json";
-
-
-
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
         }
 
         // GET: Show/Delete/5
@@ -140,6 +144,16 @@ namespace ShowApplication.Controllers
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
 
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
         }
     }
 }
