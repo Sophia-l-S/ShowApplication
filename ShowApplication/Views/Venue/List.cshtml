@@ -2,11 +2,23 @@
 @{
     ViewBag.Title = "List";
 }
+<style>
+    body {
+        background-color: #2F2F38;
+        color: #D7D8EF;
+    }
+</style>
+
+
+
 
 <h2>List</h2>
-<a href="/Vneue/New">New Venue</a>
+<a href="/Venue/New">New Venue</a>
 @foreach (var venue in Model)
 {
     <h2><a href="/Venue/Details/@venue.venueID">@venue.venueName, @venue.City, @venue.ProvenceState</a></h2>
+    //<h3>city: @venue.City</h3>
+    //<h3>Provence or State: @venue.ProvenceState</h3>
+
 }
 

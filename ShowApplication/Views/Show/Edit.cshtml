@@ -1,14 +1,22 @@
-﻿@model ShowApplication.Models.ViewModels.UpdateShow
+﻿@model ShowApplication.Models.ViewModels.updateshow
 @{
     ViewBag.Title = "Edit";
 }
+
+<style>
+    body {
+        background-color: #2F2F38;
+        color: #D7D8EF;
+    }
+</style>
+
 <h2>Update Show</h2>
 <form action="/Show/Update/@Model.SelectedShow.showID" method="POST">
     <div style="display:none;">
         <input type="text" name="showID" value="@Model.SelectedShow.showID" />
     </div>
     <div>
-        <label>ArtistID:</label> <input type="number" name="artistID" value="@Model.SelectedSHow.artistID" />
+        <label>ArtistID:</label> <input type="number" name="artistID" value="@Model.SelectedShow.artistID" />
     </div>
     <div>
         <label>VenueID:</label> <input type="number" name="venueID" value="@Model.SelectedShow.venueID" />

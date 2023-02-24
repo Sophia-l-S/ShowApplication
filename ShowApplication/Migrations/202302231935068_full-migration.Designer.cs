@@ -6,14 +6,14 @@ namespace ShowApplication.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class showvenueartist : IMigrationMetadata
+    [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
+    public sealed partial class fullmigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(showvenueartist));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(fullmigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "202302030256122_show-venue-artist"; }
+            get { return "202302231935068_full-migration"; }
         }
         
         string IMigrationMetadata.Source

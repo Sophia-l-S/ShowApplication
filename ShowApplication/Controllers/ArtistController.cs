@@ -29,7 +29,7 @@ namespace ShowApplication.Controllers
             //change the numbers
             //crul https://localhost:44321/api/artistdata/listartist
 
-            string url = "artistdata/listartist";
+            string url = "listartists";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             IEnumerable<ArtistDto> Artists = response.Content.ReadAsAsync<IEnumerable<ArtistDto>>().Result;
@@ -47,7 +47,7 @@ namespace ShowApplication.Controllers
 
             DetailsArtists ViewModel = new DetailsArtists();
 
-            string url = "artistdata/findartist/" + id;
+            string url = "findartist/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             ArtistDto SelectedArtist = response.Content.ReadAsAsync<ArtistDto>().Result;
 

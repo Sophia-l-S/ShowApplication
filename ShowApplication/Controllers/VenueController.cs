@@ -33,7 +33,7 @@ namespace ShowApplication.Controllers
             //change the numbers
             //crul https://localhost:44321/api/venuedata/listvenue
 
-            string url = "venuedata/listvenue";
+            string url = "listvenues";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             IEnumerable<VenueDto> venues = response.Content.ReadAsAsync<IEnumerable<VenueDto>>().Result;
@@ -46,15 +46,14 @@ namespace ShowApplication.Controllers
         public ActionResult Details(int id)
         {
             //objective; communicate with our venue data api to retreve a list os venues
-            //change the numbers
             //crul https://localhost:44321/api/venuedata/findvenue/{id}
 
-            string url = "venuedata/findvenue/"+id;
+            string url = "findvenue/"+id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             VenueDto Selectedvenue = response.Content.ReadAsAsync<VenueDto>().Result;
 
-           // ViewModel.SelectedVenue = SelectedVenue;
+           //ViewModel.SelectedVenue = SelectedVenue;
 
             url = "showdata/listvenueforshow/" + id;
             response = client.GetAsync(url).Result;
@@ -82,7 +81,7 @@ namespace ShowApplication.Controllers
         {
             //objective: add new venue into the system using api
            //crul -H "Content-Type:applacation/json" -d @venue.json https://localhost:44321/api/venuedata/addvenue
-            string url = "venuedata/addvenue";
+            string url = "addvenue";
             string jsonpayload = jss.Serialize(Venue);
 
             HttpContent content = new StringContent(jsonpayload);
@@ -102,7 +101,7 @@ namespace ShowApplication.Controllers
         // GET: Venue/Edit/5
         public ActionResult Edit(int id)
         {
-            string url = "venuedata/findvenue/" + id;
+            string url = "findvenue/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             VenueDto selectedVenue = response.Content.ReadAsAsync<VenueDto>().Result;
 
@@ -113,7 +112,7 @@ namespace ShowApplication.Controllers
         [HttpPost]
         public ActionResult Update(int id, Venue Venue)
         {
-           string url = "venuedata/updatevenue/" + id;
+           string url = "updatevenue/" + id;
            string jsonpayload = jss.Serialize(Venue);
            HttpContent content = new StringContent(jsonpayload);
            content.Headers.ContentType.MediaType = "application/json";
@@ -133,7 +132,7 @@ namespace ShowApplication.Controllers
         // GET: Venue/Delete/5
         public ActionResult DeleteConfirm(int id)
         {
-            string url = "venuedata/findvenue/" + id;
+            string url = "findvenue/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             VenueDto selectedVenue = response.Content.ReadAsAsync<VenueDto>().Result;
             return View(selectedVenue);
@@ -143,7 +142,7 @@ namespace ShowApplication.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            string url = "venuedata/deletevenue/" + id;
+            string url = "deletevenue/" + id;
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
 
