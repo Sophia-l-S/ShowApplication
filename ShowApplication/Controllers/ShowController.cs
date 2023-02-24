@@ -47,7 +47,7 @@ namespace ShowApplication.Controllers
             //change the numbers
             //crul https://localhost:44321/api/showdata/findshow/{id}
 
-            string url = "showdata/findshow/"+id;
+            string url = "showdata/findshow/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             ShowDto SelectedShow = response.Content.ReadAsAsync<ShowDto>().Result;
@@ -81,7 +81,7 @@ namespace ShowApplication.Controllers
             //objective: add new show into the system using api
             //crul -H "Content-Type:applacation/json" -d @show.json https://localhost:44321/api/showdata/addshow
             string url = "showdata/addshow";
-            
+
             string jsonpayload = jss.Serialize(show);
             HttpContent content = new StringContent(jsonpayload);
             content.Headers.ContentType.MediaType = "application/json";

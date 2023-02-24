@@ -3,6 +3,13 @@
     ViewBag.Title = "List";
 }
 
+<style>
+    body {
+        background-color: #2F2F38;
+        color: #D7D8EF;
+    }
+</style>
+
 <h2>List</h2>
 <a href="/Show/New">New Show</a>
 @foreach (var show in Model)
@@ -11,6 +18,5 @@
     <div>ArtistID: @show.artistID</div>
     <div>VenueID: @show.venueID</div>
     <div>Show Date and Time: @show.DateAndTime</div>
-
 }
 

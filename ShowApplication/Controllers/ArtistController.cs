@@ -47,7 +47,7 @@ namespace ShowApplication.Controllers
 
             DetailsArtists ViewModel = new DetailsArtists();
 
-            string url = "artistdata/findartist/" + id;
+            string url = "findartist/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             ArtistDto SelectedArtist = response.Content.ReadAsAsync<ArtistDto>().Result;
 
@@ -76,7 +76,7 @@ namespace ShowApplication.Controllers
             //crul -H "Content-Type:applacation/json" -d @artist.json https://localhost:44321/api/artistdata/addartist
             string url = "artistdata/addartist";
 
-            
+
             string jsonpayload = jss.Serialize(Artist);
 
             HttpContent content = new StringContent(jsonpayload);
