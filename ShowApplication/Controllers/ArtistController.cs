@@ -47,7 +47,7 @@ namespace ShowApplication.Controllers
 
             DetailsArtists ViewModel = new DetailsArtists();
 
-            string url = "artistdata/findartist/" + id;
+            string url = "findartist/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             ArtistDto SelectedArtist = response.Content.ReadAsAsync<ArtistDto>().Result;
 
